@@ -16,6 +16,9 @@
         MinWidth="900"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="OnCloseVerticalMenu">
+    <Window.DataContext>
+        <viewmodels:NavigationViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -41,15 +44,19 @@
                 <ComboBox ItemsSource="{Binding Employees}"
                           SelectedItem="{Binding CurrentEmployee}"
                           DisplayMemberPath="FullName"/>
-                <Image>
-                    <Image.Source>
-                        <Binding Path="CurrentEmployee.Image">
-                            <Binding.Converter>
-                                <converters:ImageNameToImageBytesOrEmptyImageConverter />
-                            </Binding.Converter>
-                        </Binding>
-                    </Image.Source>
-                </Image>
+                <Ellipse Width="50" Height="50">
+                    <Ellipse.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <Binding Path="CurrentEmployee.ImageName">
+                                    <Binding.Converter>
+                                        <converters:ImageNameToImageBytesOrEmptyImageConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
             </StackPanel>
             <Frame x:Name="NavigationFrame"
                    Grid.Row="1" />
