@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelekomNevaSvyazWpfApp"
         xmlns:usercontrols="clr-namespace:TelekomNevaSvyazWpfApp.Views.UserControls"
+        xmlns:viewmodels="clr-namespace:TelekomNevaSvyazWpfApp.ViewModels"
+        xmlns:converters="clr-namespace:TelekomNevaSvyazWpfApp.Converters"
+        d:DataContext="{d:DesignInstance Type=viewmodels:NavigationViewModel}"
         mc:Ignorable="d"
         Title="{Binding ElementName=NavigationFrame, Path=Content.Title}"
         Height="750"
@@ -19,13 +22,35 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <usercontrols:VerticalMenu x:Name="RibbonVerticalMenu"
-                                   PreviewMouseLeftButtonDown="OnOpenVerticalMenu" />
+                                   PreviewMouseLeftButtonDown="OnOpenVerticalMenu"
+                                   ActiveMenuItems="{Binding ActiveMenuItems}"
+                                   VerticalMenuItemContent="{Binding CurrentContent, Mode=TwoWay}"/>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}" />
+            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}" 
+                   FontSize="30"
+                   Width="auto"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
+            <StackPanel  Orientation="Horizontal"
+                         HorizontalAlignment="Right">
+                <ComboBox ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding CurrentEmployee}"
+                          DisplayMemberPath="FullName"/>
+                <Image>
+                    <Image.Source>
+                        <Binding Path="CurrentEmployee.Image">
+                            <Binding.Converter>
+                                <converters:ImageNameToImageBytesOrEmptyImageConverter />
+                            </Binding.Converter>
+                        </Binding>
+                    </Image.Source>
+                </Image>
+            </StackPanel>
             <Frame x:Name="NavigationFrame"
                    Grid.Row="1" />
         </Grid>

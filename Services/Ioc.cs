@@ -12,7 +12,7 @@ namespace TelekomNevaSvyazWpfApp
 
         public static void Register<T>()
         {
-            string? interfaceNameOfType = typeof(T)
+            string interfaceNameOfType = typeof(T)
                 .GetInterface(
                     $"I{typeof(T).Name}")?.Name;
             Application.Current.Resources[interfaceNameOfType] = Activator

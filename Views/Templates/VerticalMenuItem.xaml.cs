@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TelekomNevaSvyazWpfApp.Views.Templates
 {
@@ -29,7 +17,10 @@ namespace TelekomNevaSvyazWpfApp.Views.Templates
         }
 
         public static readonly DependencyProperty MenuContentProperty =
-            DependencyProperty.Register("MenuContent", typeof(string), typeof(VerticalMenuItem), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("MenuContent",
+                                        typeof(string),
+                                        typeof(VerticalMenuItem),
+                                        new PropertyMetadata(default(string)));
 
 
 
@@ -40,12 +31,20 @@ namespace TelekomNevaSvyazWpfApp.Views.Templates
         }
 
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(byte[]), typeof(VerticalMenuItem), new PropertyMetadata(default(byte[])));
+            DependencyProperty.Register("Source",
+                                        typeof(byte[]),
+                                        typeof(VerticalMenuItem),
+                                        new PropertyMetadata(default(byte[])));
 
 
         public VerticalMenuItem()
         {
             InitializeComponent();
+        }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            ((dynamic)Parent).Parent.Parent.VerticalMenuItemContent = MenuContent;
         }
     }
 }

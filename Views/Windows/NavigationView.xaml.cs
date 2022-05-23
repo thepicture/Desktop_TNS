@@ -17,7 +17,6 @@ namespace TelekomNevaSvyazWpfApp
         private void OnOpenVerticalMenu(object sender, MouseButtonEventArgs e)
         {
             RibbonVerticalMenu.Width = 250;
-            e.Handled = true;
         }
 
         private void OnCloseVerticalMenu(object sender, MouseButtonEventArgs e)

@@ -15,7 +15,7 @@ namespace TelekomNevaSvyazWpfApp
 
             Ioc.Register<NavigationService>();
 
-            NavigationView view = new();
+            NavigationView view = new NavigationView();
             view.Show();
             view.NavigationFrame.Navigate(new AbonentsViewModel());
         }
