@@ -16,6 +16,11 @@
         MinWidth="1000"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="OnCloseVerticalMenu">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl"
+                    Key="I"
+                    Command="{Binding ImportSubscribersCommand}" />
+    </Window.InputBindings>
     <Window.DataContext>
         <viewmodels:NavigationViewModel />
     </Window.DataContext>
@@ -27,24 +32,25 @@
         <usercontrols:VerticalMenu x:Name="RibbonVerticalMenu"
                                    PreviewMouseLeftButtonDown="OnOpenVerticalMenu"
                                    ActiveMenuItems="{Binding ActiveMenuItems}"
-                                   VerticalMenuItemContent="{Binding CurrentContent, Mode=TwoWay}"/>
+                                   VerticalMenuItemContent="{Binding CurrentContent, Mode=TwoWay}" />
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}" 
+            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}"
                    FontSize="30"
                    Width="auto"
                    FontWeight="Bold"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center" />
             <StackPanel  Orientation="Horizontal"
                          HorizontalAlignment="Right">
                 <ComboBox ItemsSource="{Binding Employees}"
                           SelectedItem="{Binding CurrentEmployee}"
-                          DisplayMemberPath="FullName"/>
-                <Ellipse Width="50" Height="50">
+                          DisplayMemberPath="FullName" />
+                <Ellipse Width="50"
+                         Height="50">
                     <Ellipse.Fill>
                         <ImageBrush>
                             <ImageBrush.ImageSource>

@@ -5,11 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a7f6424c253241b5a68ba98ea533237a" Name="Diagram1">
-        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Employee" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" Width="1.5" PointX="0.75" PointY="2.625" />
-        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Event" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.AccessNetwork" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Backbone" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.ContractType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.District" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.DistrictBuildingType" Width="1.5" PointX="0.75" PointY="8.375" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Employee" Width="1.5" PointX="8" PointY="2.125" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" Width="1.5" PointX="5.75" PointY="3.625" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Event" Width="1.5" PointX="8" PointY="4.875" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Gender" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Subscriber" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.SubscriberEquipment" Width="1.5" PointX="5.75" PointY="10.75" />
+        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Subscriber_ContractType" />
+        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_District_DistrictBuildingType" />
         <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" />
         <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" />
+        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Subscriber_Gender" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

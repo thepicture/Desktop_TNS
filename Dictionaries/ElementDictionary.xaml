@@ -29,6 +29,8 @@
         <Setter Property="Height"
                 Value="20" />
     </Style>
+    <Style TargetType="RadioButton"
+           BasedOn="{StaticResource {x:Type FrameworkElement}}" />
     <Style TargetType="PasswordBox"
            BasedOn="{StaticResource {x:Type FrameworkElement}}">
         <Setter Property="Width"

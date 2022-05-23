@@ -15,6 +15,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
+        <templates:AbonentsControl Subscribers="{Binding Subscribers}"/>
         <templates:EventsControl Events="{Binding Events}"
                                  Grid.Column="1" />
     </Grid>

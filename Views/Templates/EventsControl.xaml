@@ -41,7 +41,8 @@
                                HorizontalContentAlignment="Center">
                             <Label.Content>
                                 <AccessText Text="{Binding Text}"
-                                            TextWrapping="Wrap" />
+                                            TextWrapping="Wrap" 
+                                            TextAlignment="Center"/>
                             </Label.Content>
                         </Label>
                         <Label Content="{Binding Time, StringFormat={}{0:hh}:{0:mm}}"

@@ -67,7 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Converters\ImageNameToImageBytesOrEmptyImageConverter.cs" />
+    <Compile Include="Models\Entities\AccessNetwork.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Backbone.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\BaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +90,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\ContractType.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\District.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\DistrictBuildingType.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\Employee.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
@@ -92,13 +108,28 @@
     <Compile Include="Models\Entities\Event.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Gender.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Subscriber.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\SubscriberEquipment.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enumerations\SubscriberSortType.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Ioc.cs" />
+    <Compile Include="Services\IOpenFileDialog.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\OpenFileDialog.cs" />
     <Compile Include="ViewModels\AbonentsViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Templates\AbonentsControl.xaml.cs">
+      <DependentUpon>AbonentsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Templates\EventsControl.xaml.cs">
       <DependentUpon>EventsControl.xaml</DependentUpon>
     </Compile>
@@ -126,6 +157,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Templates\AbonentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Templates\EventsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

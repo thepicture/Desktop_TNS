@@ -25,8 +25,16 @@ namespace TelekomNevaSvyazWpfApp.Models.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AccessNetwork> AccessNetworks { get; set; }
+        public virtual DbSet<Backbone> Backbones { get; set; }
+        public virtual DbSet<ContractType> ContractTypes { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<DistrictBuildingType> DistrictBuildingTypes { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Subscriber> Subscribers { get; set; }
+        public virtual DbSet<SubscriberEquipment> SubscriberEquipments { get; set; }
     }
 }

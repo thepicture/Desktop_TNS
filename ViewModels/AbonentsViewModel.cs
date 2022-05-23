@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -19,6 +20,16 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
                 }
             };
             LoadEventsAsync();
+            LoadSubscribersAsync();
+        }
+
+        private async void LoadSubscribersAsync()
+        {
+            using (TelekomNevaSvyazBaseEntities entities = new TelekomNevaSvyazBaseEntities())
+            {
+                List<Subscriber> subscribers = await entities.Subscribers.ToListAsync();
+                Subscribers = new ObservableCollection<Subscriber>(subscribers);
+            }
         }
 
         private async void LoadEventsAsync()
@@ -39,6 +50,14 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
         {
             get => events;
             set => SetProperty(ref events, value);
+        }
+
+        private ObservableCollection<Subscriber> subscribers;
+
+        public ObservableCollection<Subscriber> Subscribers
+        {
+            get => subscribers;
+            set => SetProperty(ref subscribers, value);
         }
     }
 }

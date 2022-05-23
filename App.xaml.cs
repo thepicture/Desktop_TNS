@@ -13,7 +13,6 @@ namespace TelekomNevaSvyazWpfApp
     {
         private static int roleId;
 
-        public static event Action<int> RoleChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int RoleId
@@ -38,6 +37,7 @@ namespace TelekomNevaSvyazWpfApp
             base.OnStartup(e);
 
             Ioc.Register<NavigationService>();
+            Ioc.Register<OpenFileDialog>();
 
             NavigationView view = new NavigationView();
             view.Show();

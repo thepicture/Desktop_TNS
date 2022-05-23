@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using TelekomNevaSvyazWpfApp.Commands;
 using TelekomNevaSvyazWpfApp.Models.Entities;
+using TelekomNevaSvyazWpfApp.Services;
 
 namespace TelekomNevaSvyazWpfApp.ViewModels
 {
@@ -120,6 +125,33 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
         {
             get => employees;
             set => SetProperty(ref employees, value);
+        }
+
+        private Command importSubscribersCommand;
+
+        public ICommand ImportSubscribersCommand
+        {
+            get
+            {
+                if (importSubscribersCommand == null)
+                {
+                    importSubscribersCommand = new Command(ImportSubscribers);
+                }
+
+                return importSubscribersCommand;
+            }
+        }
+
+        private void ImportSubscribers(object commandParameter)
+        {
+            if (Ioc.Get<IOpenFileDialog>().TryOpenFile(out string filePath))
+            {
+                if (File.Exists(filePath))
+                {
+                    string subscribersJson = File.ReadAllText(filePath);
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Subscriber));
+                }
+            }
         }
     }
 }
