@@ -4,24 +4,66 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelekomNevaSvyazWpfApp"
+        xmlns:usercontrols="clr-namespace:TelekomNevaSvyazWpfApp.Views.UserControls"
+        xmlns:viewmodels="clr-namespace:TelekomNevaSvyazWpfApp.ViewModels"
+        xmlns:converters="clr-namespace:TelekomNevaSvyazWpfApp.Converters"
+        d:DataContext="{d:DesignInstance Type=viewmodels:NavigationViewModel}"
         mc:Ignorable="d"
         Title="{Binding ElementName=NavigationFrame, Path=Content.Title}"
-        Height="450"
-        Width="800"
-        MinHeight="450"
-        MinWidth="800"
-        WindowStartupLocation="CenterScreen">
+        Height="750"
+        Width="1000"
+        MinHeight="750"
+        MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="OnCloseVerticalMenu">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl"
+                    Key="I"
+                    Command="{Binding ImportSubscribersCommand}" />
+    </Window.InputBindings>
+    <Window.DataContext>
+        <viewmodels:NavigationViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <usercontrols:VerticalMenu x:Name="RibbonVerticalMenu"
+                                   PreviewMouseLeftButtonDown="OnOpenVerticalMenu"
+                                   ActiveMenuItems="{Binding ActiveMenuItems}"
+                                   VerticalMenuItemContent="{Binding CurrentContent, Mode=TwoWay}" />
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}"/>
+            <Label Content="{Binding ElementName=NavigationFrame, Path=Content.Title}"
+                   FontSize="30"
+                   Width="auto"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+            <StackPanel  Orientation="Horizontal"
+                         HorizontalAlignment="Right">
+                <ComboBox ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding CurrentEmployee}"
+                          DisplayMemberPath="FullName" />
+                <Ellipse Width="50"
+                         Height="50">
+                    <Ellipse.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <Binding Path="CurrentEmployee.ImageName">
+                                    <Binding.Converter>
+                                        <converters:ImageNameToImageBytesOrEmptyImageConverter />
+                                    </Binding.Converter>
+                                </Binding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
             <Frame x:Name="NavigationFrame"
                    Grid.Row="1" />
         </Grid>

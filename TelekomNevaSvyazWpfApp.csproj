@@ -1,20 +1,277 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E18C203E-33EC-4F69-98DE-246592B03BD4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <RootNamespace>TelekomNevaSvyazWpfApp</RootNamespace>
+    <AssemblyName>TelekomNevaSvyazWpfApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
     <ApplicationIcon>image.ico</ApplicationIcon>
   </PropertyGroup>
-
   <ItemGroup>
-    <Content Include="image.ico" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Models\Entities\" />
-    <Folder Include="Views\Templates\" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Converters\ImageNameToImageBytesOrEmptyImageConverter.cs" />
+    <Compile Include="Models\Entities\AccessNetwork.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Backbone.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\BaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\BaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\BaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\ContractType.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\District.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\DistrictBuildingType.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Employee.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\EmployeeRole.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Event.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Gender.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Subscriber.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\SubscriberEquipment.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enumerations\SubscriberSortType.cs" />
+    <Compile Include="Models\ObservableObject.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\Ioc.cs" />
+    <Compile Include="Services\IOpenFileDialog.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\OpenFileDialog.cs" />
+    <Compile Include="ViewModels\AbonentsViewModel.cs" />
+    <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Templates\AbonentsControl.xaml.cs">
+      <DependentUpon>AbonentsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Templates\EventsControl.xaml.cs">
+      <DependentUpon>EventsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Templates\VerticalMenuItem.xaml.cs">
+      <DependentUpon>VerticalMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AbonentsView.xaml.cs">
+      <DependentUpon>AbonentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\VerticalMenu.xaml.cs">
+      <DependentUpon>VerticalMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Dictionaries\ElementDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dictionaries\TemplateDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Templates\AbonentsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Templates\EventsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Templates\VerticalMenuItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\AbonentsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\VerticalMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Windows\NavigationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Models\Entities\BaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Entities\BaseModel.edmx.diagram">
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CompanyLogo.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1516.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1517.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1518.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1519.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1520.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1521.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1522.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1523.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1524.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1525.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1526.jpg" />
+    <Content Include="Models\Entities\BaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Entities\BaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseModel.edmx</DependentUpon>
+      <LastGenOutput>BaseModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Resources\EmployeePhotos\ID1527.jfif" />
+    <Resource Include="Resources\EmployeePhotos\ID1528.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1529.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1530.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1531.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1532.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1533.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1534.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1535.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1536.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1537.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1538.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1539.png" />
+    <Resource Include="Resources\EmployeePhotos\ID1540.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1541.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1542.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1543.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1544.jpg" />
+    <Resource Include="Resources\EmployeePhotos\ID1545.jpg" />
+    <Resource Include="Resources\EmployeePhotos\NoEmployeeImage.jpg" />
+    <Resource Include="Resources\MenuIcons\CRM.png" />
+    <Resource Include="Resources\MenuIcons\Абоненты.png" />
+    <Resource Include="Resources\MenuIcons\Активы.png" />
+    <Resource Include="Resources\MenuIcons\Биллинг.jpg" />
+    <Resource Include="Resources\MenuIcons\Поддержка пользователей.jpg" />
+    <Resource Include="Resources\MenuIcons\Управление обрудованием.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

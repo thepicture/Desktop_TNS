@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TelekomNevaSvyazBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessNetwork">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="1280" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Backbone">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AreaInSquareMeters" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="CountOfPeople" Type="bigint" Nullable="false" />
+          <Property Name="CountOfSubways" Type="int" Nullable="false" />
+          <Property Name="BuildingTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DistrictBuildingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="BirthDay" Type="date" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RegistrationAddress" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="LivingAddress" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="PassportSeriesAndNumber" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="SubdivisionCode" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="WhoGavePassport" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="PassportGaveDate" Type="date" Nullable="false" />
+          <Property Name="ContractNumber" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+          <Property Name="ContractTypeId" Type="int" Nullable="false" />
+          <Property Name="ContractRejectReason" Type="nvarchar(max)" />
+          <Property Name="PersonalAccount" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="ContractRejectDate" Type="date" />
+        </EntityType>
+        <EntityType Name="SubscriberEquipment">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_District_DistrictBuildingType">
+          <End Role="DistrictBuildingType" Type="Self.DistrictBuildingType" Multiplicity="1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictBuildingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="BuildingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeRole">
+          <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EmployeeRole">
+          <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriber_ContractType">
+          <End Role="ContractType" Type="Self.ContractType" Multiplicity="1" />
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriber">
+              <PropertyRef Name="ContractTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriber_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriber">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TelekomNevaSvyazBaseModelStoreContainer">
+          <EntitySet Name="AccessNetwork" EntityType="Self.AccessNetwork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Backbone" EntityType="Self.Backbone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractType" EntityType="Self.ContractType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DistrictBuildingType" EntityType="Self.DistrictBuildingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriber" EntityType="Self.Subscriber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscriberEquipment" EntityType="Self.SubscriberEquipment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_District_DistrictBuildingType" Association="Self.FK_District_DistrictBuildingType">
+            <End Role="DistrictBuildingType" EntitySet="DistrictBuildingType" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeRole" Association="Self.FK_Employee_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRole" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EmployeeRole" Association="Self.FK_Event_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRole" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriber_ContractType" Association="Self.FK_Subscriber_ContractType">
+            <End Role="ContractType" EntitySet="ContractType" />
+            <End Role="Subscriber" EntitySet="Subscriber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriber_Gender" Association="Self.FK_Subscriber_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Subscriber" EntitySet="Subscriber" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TelekomNevaSvyazBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TelekomNevaSvyazBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessNetworks" EntityType="TelekomNevaSvyazBaseModel.AccessNetwork" />
+          <EntitySet Name="Backbones" EntityType="TelekomNevaSvyazBaseModel.Backbone" />
+          <EntitySet Name="ContractTypes" EntityType="TelekomNevaSvyazBaseModel.ContractType" />
+          <EntitySet Name="Districts" EntityType="TelekomNevaSvyazBaseModel.District" />
+          <EntitySet Name="DistrictBuildingTypes" EntityType="TelekomNevaSvyazBaseModel.DistrictBuildingType" />
+          <EntitySet Name="Employees" EntityType="TelekomNevaSvyazBaseModel.Employee" />
+          <EntitySet Name="EmployeeRoles" EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" />
+          <EntitySet Name="Events" EntityType="TelekomNevaSvyazBaseModel.Event" />
+          <EntitySet Name="Genders" EntityType="TelekomNevaSvyazBaseModel.Gender" />
+          <EntitySet Name="Subscribers" EntityType="TelekomNevaSvyazBaseModel.Subscriber" />
+          <EntitySet Name="SubscriberEquipments" EntityType="TelekomNevaSvyazBaseModel.SubscriberEquipment" />
+          <AssociationSet Name="FK_Subscriber_ContractType" Association="TelekomNevaSvyazBaseModel.FK_Subscriber_ContractType">
+            <End Role="ContractType" EntitySet="ContractTypes" />
+            <End Role="Subscriber" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_DistrictBuildingType" Association="TelekomNevaSvyazBaseModel.FK_District_DistrictBuildingType">
+            <End Role="DistrictBuildingType" EntitySet="DistrictBuildingTypes" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeeRole" Association="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EmployeeRole" Association="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscriber_Gender" Association="TelekomNevaSvyazBaseModel.FK_Subscriber_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Subscriber" EntitySet="Subscribers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccessNetwork">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="1280" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Backbone">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContractType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subscribers" Relationship="TelekomNevaSvyazBaseModel.FK_Subscriber_ContractType" FromRole="ContractType" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AreaInSquareMeters" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="CountOfPeople" Type="Int64" Nullable="false" />
+          <Property Name="CountOfSubways" Type="Int32" Nullable="false" />
+          <Property Name="BuildingTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DistrictBuildingType" Relationship="TelekomNevaSvyazBaseModel.FK_District_DistrictBuildingType" FromRole="District" ToRole="DistrictBuildingType" />
+        </EntityType>
+        <EntityType Name="DistrictBuildingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Districts" Relationship="TelekomNevaSvyazBaseModel.FK_District_DistrictBuildingType" FromRole="DistrictBuildingType" ToRole="District" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ImageName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeRole" Relationship="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" FromRole="Employee" ToRole="EmployeeRole" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" FromRole="EmployeeRole" ToRole="Employee" />
+          <NavigationProperty Name="Events" Relationship="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" FromRole="EmployeeRole" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <NavigationProperty Name="EmployeeRole" Relationship="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" FromRole="Event" ToRole="EmployeeRole" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subscribers" Relationship="TelekomNevaSvyazBaseModel.FK_Subscriber_Gender" FromRole="Gender" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationAddress" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="LivingAddress" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="PassportSeriesAndNumber" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="SubdivisionCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="WhoGavePassport" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="PassportGaveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ContractNumber" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ContractTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ContractRejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalAccount" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ContractRejectDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ContractType" Relationship="TelekomNevaSvyazBaseModel.FK_Subscriber_ContractType" FromRole="Subscriber" ToRole="ContractType" />
+          <NavigationProperty Name="Gender" Relationship="TelekomNevaSvyazBaseModel.FK_Subscriber_Gender" FromRole="Subscriber" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="SubscriberEquipment">
+          <Key>
+            <PropertyRef Name="SerialNumber" />
+          </Key>
+          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Subscriber_ContractType">
+          <End Type="TelekomNevaSvyazBaseModel.ContractType" Role="ContractType" Multiplicity="1" />
+          <End Type="TelekomNevaSvyazBaseModel.Subscriber" Role="Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriber">
+              <PropertyRef Name="ContractTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_DistrictBuildingType">
+          <End Type="TelekomNevaSvyazBaseModel.DistrictBuildingType" Role="DistrictBuildingType" Multiplicity="1" />
+          <End Type="TelekomNevaSvyazBaseModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DistrictBuildingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="BuildingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeeRole">
+          <End Type="TelekomNevaSvyazBaseModel.EmployeeRole" Role="EmployeeRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TelekomNevaSvyazBaseModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EmployeeRole">
+          <End Type="TelekomNevaSvyazBaseModel.EmployeeRole" Role="EmployeeRole" Multiplicity="1" />
+          <End Type="TelekomNevaSvyazBaseModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscriber_Gender">
+          <End Type="TelekomNevaSvyazBaseModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="TelekomNevaSvyazBaseModel.Subscriber" Role="Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriber">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TelekomNevaSvyazBaseModelStoreContainer" CdmEntityContainer="TelekomNevaSvyazBaseEntities">
+          <EntitySetMapping Name="AccessNetworks">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.AccessNetwork">
+              <MappingFragment StoreEntitySet="AccessNetwork">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Backbones">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Backbone">
+              <MappingFragment StoreEntitySet="Backbone">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractTypes">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.ContractType">
+              <MappingFragment StoreEntitySet="ContractType">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="BuildingTypeId" ColumnName="BuildingTypeId" />
+                <ScalarProperty Name="CountOfSubways" ColumnName="CountOfSubways" />
+                <ScalarProperty Name="CountOfPeople" ColumnName="CountOfPeople" />
+                <ScalarProperty Name="AreaInSquareMeters" ColumnName="AreaInSquareMeters" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DistrictBuildingTypes">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.DistrictBuildingType">
+              <MappingFragment StoreEntitySet="DistrictBuildingType">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRoles">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.EmployeeRole">
+              <MappingFragment StoreEntitySet="EmployeeRole">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribers">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Subscriber">
+              <MappingFragment StoreEntitySet="Subscriber">
+                <ScalarProperty Name="ContractRejectDate" ColumnName="ContractRejectDate" />
+                <ScalarProperty Name="PersonalAccount" ColumnName="PersonalAccount" />
+                <ScalarProperty Name="ContractRejectReason" ColumnName="ContractRejectReason" />
+                <ScalarProperty Name="ContractTypeId" ColumnName="ContractTypeId" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="PassportGaveDate" ColumnName="PassportGaveDate" />
+                <ScalarProperty Name="WhoGavePassport" ColumnName="WhoGavePassport" />
+                <ScalarProperty Name="SubdivisionCode" ColumnName="SubdivisionCode" />
+                <ScalarProperty Name="PassportSeriesAndNumber" ColumnName="PassportSeriesAndNumber" />
+                <ScalarProperty Name="LivingAddress" ColumnName="LivingAddress" />
+                <ScalarProperty Name="RegistrationAddress" ColumnName="RegistrationAddress" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriberEquipments">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.SubscriberEquipment">
+              <MappingFragment StoreEntitySet="SubscriberEquipment">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
