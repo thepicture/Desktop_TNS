@@ -27,5 +27,6 @@ namespace TelekomNevaSvyazWpfApp.Models.Entities
     
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
     }
 }

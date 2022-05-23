@@ -89,6 +89,9 @@
     <Compile Include="Models\Entities\EmployeeRole.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Event.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Ioc.cs" />
@@ -96,6 +99,9 @@
     <Compile Include="ViewModels\AbonentsViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Templates\EventsControl.xaml.cs">
+      <DependentUpon>EventsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Templates\VerticalMenuItem.xaml.cs">
       <DependentUpon>VerticalMenuItem.xaml</DependentUpon>
     </Compile>
@@ -120,6 +126,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Templates\EventsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Templates\VerticalMenuItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

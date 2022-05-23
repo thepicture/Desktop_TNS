@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TelekomNevaSvyazBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TelekomNevaSvyazBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,6 +21,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" />
+        </EntityType>
         <Association Name="FK_Employee_EmployeeRole">
           <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -31,6 +41,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Employee">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_EmployeeRole">
+          <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
               <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
@@ -38,39 +60,68 @@
         <EntityContainer Name="TelekomNevaSvyazBaseModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Employee_EmployeeRole" Association="Self.FK_Employee_EmployeeRole">
             <End Role="EmployeeRole" EntitySet="EmployeeRole" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_Event_EmployeeRole" Association="Self.FK_Event_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRole" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TelekomNevaSvyazBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TelekomNevaSvyazBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="TelekomNevaSvyazBaseModel.Employee" />
+          <EntitySet Name="EmployeeRoles" EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" />
+          <EntitySet Name="Events" EntityType="TelekomNevaSvyazBaseModel.Event" />
+          <AssociationSet Name="FK_Employee_EmployeeRole" Association="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_EmployeeRole" Association="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole">
+            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FullName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="ImageName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EmployeeRole" Relationship="Self.FK_Employee_EmployeeRole" FromRole="Employee" ToRole="EmployeeRole" />
+          <NavigationProperty Name="EmployeeRole" Relationship="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" FromRole="Employee" ToRole="EmployeeRole" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_EmployeeRole" FromRole="EmployeeRole" ToRole="Employee" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" FromRole="EmployeeRole" ToRole="Employee" />
+          <NavigationProperty Name="Events" Relationship="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" FromRole="EmployeeRole" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <NavigationProperty Name="EmployeeRole" Relationship="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" FromRole="Event" ToRole="EmployeeRole" />
         </EntityType>
         <Association Name="FK_Employee_EmployeeRole">
-          <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="1">
+          <End Type="TelekomNevaSvyazBaseModel.EmployeeRole" Role="EmployeeRole" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="TelekomNevaSvyazBaseModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmployeeRole">
               <PropertyRef Name="Id" />
@@ -80,14 +131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TelekomNevaSvyazBaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="EmployeeRoles" EntityType="Self.EmployeeRole" />
-          <AssociationSet Name="FK_Employee_EmployeeRole" Association="Self.FK_Employee_EmployeeRole">
-            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
-            <End Role="Employee" EntitySet="Employees" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_Event_EmployeeRole">
+          <End Type="TelekomNevaSvyazBaseModel.EmployeeRole" Role="EmployeeRole" Multiplicity="1" />
+          <End Type="TelekomNevaSvyazBaseModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -97,18 +152,29 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmployeeRoles">
             <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.EmployeeRole">
               <MappingFragment StoreEntitySet="EmployeeRole">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="TelekomNevaSvyazBaseModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

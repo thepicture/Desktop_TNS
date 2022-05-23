@@ -11,9 +11,9 @@
         mc:Ignorable="d"
         Title="{Binding ElementName=NavigationFrame, Path=Content.Title}"
         Height="750"
-        Width="900"
+        Width="1000"
         MinHeight="750"
-        MinWidth="900"
+        MinWidth="1000"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="OnCloseVerticalMenu">
     <Window.DataContext>

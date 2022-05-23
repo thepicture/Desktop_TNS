@@ -64,6 +64,7 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
                         .Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
                     break;
             }
+            (App.Current as App).RoleId = CurrentEmployee.RoleId;
         }
 
         public string[] ActiveMenuItems

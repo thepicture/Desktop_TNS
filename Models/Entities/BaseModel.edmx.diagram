@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a7f6424c253241b5a68ba98ea533237a" Name="Diagram1">
-        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Employee" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Employee" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.EmployeeRole" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="TelekomNevaSvyazBaseModel.Event" Width="1.5" PointX="3" PointY="3.75" />
+        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Employee_EmployeeRole" />
+        <AssociationConnector Association="TelekomNevaSvyazBaseModel.FK_Event_EmployeeRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
