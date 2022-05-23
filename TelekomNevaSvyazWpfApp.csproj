@@ -9,12 +9,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\CompanyLogo.jpg" />
+    <None Remove="Resources\MenuIcons\CRM.png" />
+    <None Remove="Resources\MenuIcons\Абоненты.png" />
+    <None Remove="Resources\MenuIcons\Активы.png" />
+    <None Remove="Resources\MenuIcons\Биллинг.jpg" />
+    <None Remove="Resources\MenuIcons\Поддержка пользователей.jpg" />
+    <None Remove="Resources\MenuIcons\Управление обрудованием.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="image.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\Entities\" />
-    <Folder Include="Views\Templates\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\CompanyLogo.jpg" />
+    <Resource Include="Resources\MenuIcons\CRM.png" />
+    <Resource Include="Resources\MenuIcons\Абоненты.png" />
+    <Resource Include="Resources\MenuIcons\Активы.png" />
+    <Resource Include="Resources\MenuIcons\Биллинг.jpg" />
+    <Resource Include="Resources\MenuIcons\Поддержка пользователей.jpg" />
+    <Resource Include="Resources\MenuIcons\Управление обрудованием.jpg" />
   </ItemGroup>
 
 </Project>
