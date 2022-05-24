@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Input;
+using TelekomNevaSvyazWpfApp.Commands;
 using TelekomNevaSvyazWpfApp.Models.Entities;
 
 namespace TelekomNevaSvyazWpfApp.ViewModels
 {
-    public class AbonentsViewModel : ViewModelBase
+    public class SubscribersViewModel : ViewModelBase
     {
-        public AbonentsViewModel()
+        public SubscribersViewModel()
         {
             Title = "Абоненты ТНС";
             (App.Current as App).PropertyChanged += (o, e) =>
@@ -27,7 +28,9 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
         {
             using (TelekomNevaSvyazBaseEntities entities = new TelekomNevaSvyazBaseEntities())
             {
-                List<Subscriber> subscribers = await entities.Subscribers.ToListAsync();
+                List<Subscriber> subscribers = await entities.Subscribers
+                    .Include(s => s.ContractType)
+                    .ToListAsync();
                 Subscribers = new ObservableCollection<Subscriber>(subscribers);
             }
         }
@@ -58,6 +61,27 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
         {
             get => subscribers;
             set => SetProperty(ref subscribers, value);
+        }
+
+        private Command goToSubscriberInformationCommand;
+
+        public ICommand GoToSubscriberInformationCommand
+        {
+            get
+            {
+                if (goToSubscriberInformationCommand == null)
+                {
+                    goToSubscriberInformationCommand = new Command(GoToSubscriberInformation);
+                }
+
+                return goToSubscriberInformationCommand;
+            }
+        }
+
+        private void GoToSubscriberInformation(object commandParameter)
+        {
+            Subscriber subscriber = (Subscriber)commandParameter;
+            NavigationService.Navigate<SubscriberInformationViewModel, Subscriber>(subscriber);
         }
     }
 }

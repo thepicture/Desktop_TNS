@@ -2,19 +2,33 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TelekomNevaSvyazWpfApp.Models.Entities;
-using TelekomNevaSvyazWpfApp.Models.Enumerations;
 
 namespace TelekomNevaSvyazWpfApp.Views.Templates
 {
     /// <summary>
-    /// Interaction logic for AbonentsControl.xaml
+    /// Interaction logic for SubscribersControl.xaml
     /// </summary>
-    public partial class AbonentsControl : UserControl
+    public partial class SubscribersControl : UserControl
     {
+        public ICommand SelectItemCommand
+        {
+            get { return (ICommand)GetValue(SelectItemCommandProperty); }
+            set { SetValue(SelectItemCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectItemCommandProperty =
+            DependencyProperty.Register("SelectItemCommand",
+                                        typeof(ICommand),
+                                        typeof(SubscribersControl),
+                                        new PropertyMetadata(null));
+
+
+
         private void OnFilterChanged()
         {
-            if(Subscribers == null)
+            if (Subscribers == null)
             {
                 return;
             }
@@ -49,7 +63,7 @@ namespace TelekomNevaSvyazWpfApp.Views.Templates
         public static readonly DependencyProperty FilteredSubscribersProperty =
             DependencyProperty.Register("FilteredSubscribers",
                                         typeof(ObservableCollection<Subscriber>),
-                                        typeof(AbonentsControl),
+                                        typeof(SubscribersControl),
                                         new PropertyMetadata(null));
 
 
@@ -63,11 +77,11 @@ namespace TelekomNevaSvyazWpfApp.Views.Templates
         public static readonly DependencyProperty SubscribersProperty =
             DependencyProperty.Register("Subscribers",
                                         typeof(ObservableCollection<Subscriber>),
-                                        typeof(AbonentsControl),
+                                        typeof(SubscribersControl),
                                         new PropertyMetadata(null));
 
 
-        public AbonentsControl()
+        public SubscribersControl()
         {
             InitializeComponent();
         }

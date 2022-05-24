@@ -2,7 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodels="clr-namespace:TelekomNevaSvyazWpfApp.ViewModels"
                     xmlns:usercontrols="clr-namespace:TelekomNevaSvyazWpfApp.Views.UserControls">
-    <DataTemplate DataType="{x:Type viewmodels:AbonentsViewModel}">
-        <usercontrols:AbonentsView />
+    <DataTemplate DataType="{x:Type viewmodels:SubscribersViewModel}">
+        <usercontrols:SubscribersView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:SubscriberInformationViewModel}">
+        <usercontrols:SubscriberInformationView />
     </DataTemplate>
 </ResourceDictionary>

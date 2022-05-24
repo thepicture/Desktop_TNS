@@ -94,7 +94,7 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
                     switch (value)
                     {
                         case "Абоненты":
-                            NavigationService.Navigate<AbonentsViewModel>();
+                            NavigationService.Navigate<SubscribersViewModel>();
                             break;
                         default:
                             break;
@@ -144,12 +144,16 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
 
         private void ImportSubscribers(object commandParameter)
         {
-            if (Ioc.Get<IOpenFileDialog>().TryOpenFile(out string filePath))
+            if (Ioc
+                    .Get<IOpenFileDialog>()
+                    .TryOpenFile(out string filePath))
             {
                 if (File.Exists(filePath))
                 {
                     string subscribersJson = File.ReadAllText(filePath);
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Subscriber));
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(
+                        typeof(Subscriber));
+
                 }
             }
         }

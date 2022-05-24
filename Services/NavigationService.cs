@@ -27,5 +27,13 @@ namespace TelekomNevaSvyazWpfApp.Services
                 ((NavigationView)Application.Current.MainWindow).NavigationFrame.GoBack();
             }
         }
+
+        public void Navigate<T, TParam>(TParam param)
+        {
+            ((NavigationView)Application.Current.MainWindow).NavigationFrame
+                .Navigate(
+                    Activator.CreateInstance(typeof(T),
+                                             new object[] { param }));
+        }
     }
 }
