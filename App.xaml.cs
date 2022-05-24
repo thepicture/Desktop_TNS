@@ -41,7 +41,7 @@ namespace TelekomNevaSvyazWpfApp
 
             NavigationView view = new NavigationView();
             view.Show();
-            view.NavigationFrame.Navigate(new AbonentsViewModel());
+            view.NavigationFrame.Navigate(new SubscribersViewModel());
         }
     }
 }

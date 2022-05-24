@@ -125,12 +125,12 @@
     <Compile Include="Services\IOpenFileDialog.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\OpenFileDialog.cs" />
-    <Compile Include="ViewModels\AbonentsViewModel.cs" />
+    <Compile Include="ViewModels\SubscribersViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\SubscriberInformationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\Templates\AbonentsControl.xaml.cs">
-      <DependentUpon>AbonentsControl.xaml</DependentUpon>
+    <Compile Include="Views\Templates\SubscribersControl.xaml.cs">
+      <DependentUpon>SubscribersControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Templates\EventsControl.xaml.cs">
       <DependentUpon>EventsControl.xaml</DependentUpon>
@@ -138,8 +138,8 @@
     <Compile Include="Views\Templates\VerticalMenuItem.xaml.cs">
       <DependentUpon>VerticalMenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\AbonentsView.xaml.cs">
-      <DependentUpon>AbonentsView.xaml</DependentUpon>
+    <Compile Include="Views\UserControls\SubscribersView.xaml.cs">
+      <DependentUpon>SubscribersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\SubscriberInformationView.xaml.cs">
       <DependentUpon>SubscriberInformationView.xaml</DependentUpon>
@@ -162,7 +162,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Templates\AbonentsControl.xaml">
+    <Page Include="Views\Templates\SubscribersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,7 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserControls\AbonentsView.xaml">
+    <Page Include="Views\UserControls\SubscribersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

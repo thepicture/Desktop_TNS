@@ -94,7 +94,7 @@ namespace TelekomNevaSvyazWpfApp.ViewModels
                     switch (value)
                     {
                         case "Абоненты":
-                            NavigationService.Navigate<AbonentsViewModel>();
+                            NavigationService.Navigate<SubscribersViewModel>();
                             break;
                         default:
                             break;

@@ -8,9 +8,9 @@ using TelekomNevaSvyazWpfApp.Models.Entities;
 
 namespace TelekomNevaSvyazWpfApp.ViewModels
 {
-    public class AbonentsViewModel : ViewModelBase
+    public class SubscribersViewModel : ViewModelBase
     {
-        public AbonentsViewModel()
+        public SubscribersViewModel()
         {
             Title = "Абоненты ТНС";
             (App.Current as App).PropertyChanged += (o, e) =>
