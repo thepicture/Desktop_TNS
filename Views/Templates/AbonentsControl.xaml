@@ -42,6 +42,15 @@
                 <DataGridTextColumn Header="Лицевой счёт"
                                     Binding="{Binding PersonalAccount}" />
                 <DataGridTextColumn Header="Перечень подключенных услуг" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button CommandParameter="{Binding .}"
+                                    Command="{Binding ElementName=Control, Path=SelectItemCommand}"
+                                    Content="Подробнее" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <UniformGrid Columns="2"
@@ -50,7 +59,7 @@
                       Name="ActiveCheckBox"
                       Checked="OnActiveChecked"
                       Unchecked="OnActiveUnchecked"
-                      Loaded="OnLoaded"/>
+                      Loaded="OnLoaded" />
             <CheckBox Content="Неактивные"
                       x:Name="InactiveCheckBox"
                       Checked="OnIntactiveChecked"

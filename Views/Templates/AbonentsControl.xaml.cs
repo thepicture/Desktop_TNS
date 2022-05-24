@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TelekomNevaSvyazWpfApp.Models.Entities;
-using TelekomNevaSvyazWpfApp.Models.Enumerations;
 
 namespace TelekomNevaSvyazWpfApp.Views.Templates
 {
@@ -12,9 +12,25 @@ namespace TelekomNevaSvyazWpfApp.Views.Templates
     /// </summary>
     public partial class AbonentsControl : UserControl
     {
+
+
+        public ICommand SelectItemCommand
+        {
+            get { return (ICommand)GetValue(SelectItemCommandProperty); }
+            set { SetValue(SelectItemCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectItemCommandProperty =
+            DependencyProperty.Register("SelectItemCommand",
+                                        typeof(ICommand),
+                                        typeof(AbonentsControl),
+                                        new PropertyMetadata(null));
+
+
+
         private void OnFilterChanged()
         {
-            if(Subscribers == null)
+            if (Subscribers == null)
             {
                 return;
             }

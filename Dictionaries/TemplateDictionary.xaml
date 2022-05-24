@@ -5,4 +5,7 @@
     <DataTemplate DataType="{x:Type viewmodels:AbonentsViewModel}">
         <usercontrols:AbonentsView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:SubscriberInformationViewModel}">
+        <usercontrols:SubscriberInformationView />
+    </DataTemplate>
 </ResourceDictionary>

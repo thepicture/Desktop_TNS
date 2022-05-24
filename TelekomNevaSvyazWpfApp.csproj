@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Models\Enumerations\SubscriberSortType.cs" />
     <Compile Include="Models\ObservableObject.cs" />
+    <Compile Include="Models\Partial\PartialSubscriber.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Ioc.cs" />
     <Compile Include="Services\IOpenFileDialog.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Services\OpenFileDialog.cs" />
     <Compile Include="ViewModels\AbonentsViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\SubscriberInformationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Templates\AbonentsControl.xaml.cs">
       <DependentUpon>AbonentsControl.xaml</DependentUpon>
@@ -138,6 +140,9 @@
     </Compile>
     <Compile Include="Views\UserControls\AbonentsView.xaml.cs">
       <DependentUpon>AbonentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\SubscriberInformationView.xaml.cs">
+      <DependentUpon>SubscriberInformationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\VerticalMenu.xaml.cs">
       <DependentUpon>VerticalMenu.xaml</DependentUpon>
@@ -172,6 +177,10 @@
     <Page Include="Views\UserControls\AbonentsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\SubscriberInformationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\VerticalMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
