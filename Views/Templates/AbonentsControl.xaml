@@ -11,48 +11,50 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding ElementName=Control, Path=FilteredSubscribers}"
-                  IsReadOnly="True"
-                  AlternationCount="2"
-                  AlternatingRowBackground="WhiteSmoke"
-                  ColumnWidth="*"
-                  AutoGenerateColumns="False"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Абонентский номер"
-                                    Binding="{Binding Number}" />
-                <DataGridTextColumn Header="ФИО"
-                                    Binding="{Binding FullName}" />
-                <DataGridTemplateColumn Header="Номер договора с абонентом">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Inlines>
-                                    <Run Text="{Binding Number}" />
-                                    <Run Text="-" />
-                                    <Run Text="{Binding ContractDate, StringFormat={}{0:MM}}" />
-                                    <Run Text="-" />
-                                    <Run Text="{Binding ContractDate, StringFormat={}{0:yyyy}}" />
-                                </TextBlock.Inlines>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Лицевой счёт"
-                                    Binding="{Binding PersonalAccount}" />
-                <DataGridTextColumn Header="Перечень подключенных услуг" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button CommandParameter="{Binding .}"
-                                    Command="{Binding ElementName=Control, Path=SelectItemCommand}"
-                                    Content="Подробнее" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <DataGrid ItemsSource="{Binding ElementName=Control, Path=FilteredSubscribers}"
+                      IsReadOnly="True"
+                      AlternationCount="2"
+                      AlternatingRowBackground="WhiteSmoke"
+                      AutoGenerateColumns="False"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Абонентский номер"
+                                        Binding="{Binding Number}" />
+                    <DataGridTextColumn Header="ФИО"
+                                        Binding="{Binding FullName}" />
+                    <DataGridTemplateColumn Header="Номер договора с абонентом">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Inlines>
+                                        <Run Text="{Binding Number}" />
+                                        <Run Text="-" />
+                                        <Run Text="{Binding ContractDate, StringFormat={}{0:MM}}" />
+                                        <Run Text="-" />
+                                        <Run Text="{Binding ContractDate, StringFormat={}{0:yyyy}}" />
+                                    </TextBlock.Inlines>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Лицевой счёт"
+                                        Binding="{Binding PersonalAccount}" />
+                    <DataGridTextColumn Header="Перечень подключенных услуг" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button CommandParameter="{Binding .}"
+                                        Command="{Binding ElementName=Control, Path=SelectItemCommand}"
+                                        Content="Подробнее" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
         <UniformGrid Columns="2"
                      Grid.Row="1">
             <CheckBox Content="Активные"
